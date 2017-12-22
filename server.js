@@ -1,9 +1,19 @@
+const express = require('express');
 const app = require('express')();
-const cors = require('cors')
+const cors = require('cors');
 const bodyParser = require('body-parser');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 //Enable CORS
 app.use(cors());
+
+// static file middleware
+app.use(express.static(path.join(__dirname, 'public')));
 
 const species = [
   {
@@ -90,20 +100,36 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
+app.use(cookieParser());
+
+app.get('/', (req, res) => {
+  res.render('index');
+});
 
 app.get('/sightings', (req, res) => {
-  res.json(sightings);
+  res.status(200).json(sightings);
+});
+
+app.get('/sightings/:id', (req, res) => {
+  var sightingId = req.params.id;
+  for (var i = 0; i < sightings.length; i++) {
+    if (sightings[i].id === sightingId) {
+      res.status(200).json(sightings[i]);
+    }
+  }
 });
 
 app.post('/sightings', (req, res) => {
   req.body.id = (sightings.length + 1).toString();
   sightings.push(req.body);
-  res.json(req.body);
+  res.status(200).json(req.body);
 });
 
 app.get('/species', (req, res) => {
-  res.json(species);
+  res.status(200).json(species);
 });
+
+
 
 const port = process.env.PORT ? process.env.PORT : 8081;
 const server = app.listen(port, () => {

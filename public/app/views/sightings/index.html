@@ -1,0 +1,18 @@
+<div class="page-header">
+    <h1>Sightings</h1>
+</div>
+
+<div ng-repeat="sight in sights" class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <a ng-href="#/sightings/{{ sight.id }}">Species: {{ sight.species }}</a>
+            <input class="btn btn-danger pull-right" type="button" value="Delete"/>
+        </h3>
+    </div>
+    <div class="panel-body">
+        Date: {{ sight.dateTime | date: 'yyyy-MM-dd HH:mm:ss' }}
+        <div class="pull-right">
+            Count: {{ sight.count }}
+        </div>
+    </div>
+</div>
