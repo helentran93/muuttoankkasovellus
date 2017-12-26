@@ -100,10 +100,11 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.get('/', (req, res) => {
-  res.render('index');
+  res.sendFile('index.html', { root: __dirname + '/views'});
 });
 
 app.get('/sightings', (req, res) => {

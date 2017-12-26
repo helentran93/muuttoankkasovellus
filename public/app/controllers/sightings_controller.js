@@ -7,7 +7,7 @@ MuuttoApp.controller('SightingsController', function($scope, $location, Api){
     $scope.newSight = {};
     
     $scope.addSight = function() {
-        Api.addSight($scope.newSight).success((sighting) => {
+        Api.addSight($scope.newSight).then(function (sighting) {
             $location.path("/sightings/" + sighting.id);
         });
     };
