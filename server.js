@@ -121,16 +121,15 @@ app.get('/sightings/:id', (req, res) => {
 });
 
 app.post('/sightings', (req, res) => {
-  req.body.id = (sightings.length + 1).toString();
-  sightings.push(req.body);
-  res.status(200).json(req.body);
+  var newSight = req.body;
+  newSight.id = (sightings.length + 1).toString();
+  sightings.push(newSight);
+  res.status(200).json(newSight);
 });
 
 app.get('/species', (req, res) => {
   res.status(200).json(species);
 });
-
-
 
 const port = process.env.PORT ? process.env.PORT : 8081;
 const server = app.listen(port, () => {

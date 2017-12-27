@@ -1,14 +1,18 @@
-MuuttoApp.controller('SightingsController', function($scope, $location, Api){
+MuuttoApp.controller('SightingsController', function($scope, $route, Api){
     
     Api.getSightings().then(function(sights){
         $scope.sights = sights.data;
     });
     
+    Api.getSpecies().then(function(species){
+        $scope.species = species.data;
+    });
+    
     $scope.newSight = {};
     
     $scope.addSight = function() {
-        Api.addSight($scope.newSight).then(function (sighting) {
-            $location.path("/sightings/" + sighting.id);
+        Api.addSighting($scope.newSight).then(function() {
+            $route.reload();
         });
     };
 })

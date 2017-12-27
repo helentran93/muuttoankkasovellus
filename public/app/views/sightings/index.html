@@ -6,12 +6,30 @@
     <div class="panel-heading">
         <h3 class="panel-title">
             <a ng-href="/sightings/{{ sight.id }}">Species: {{ sight.species }}</a>
-            <input class="btn btn-danger pull-right" type="button" value="Delete"/>
         </h3>
     </div>
     <div class="panel-body">
-        <p>Date: {{ sight.dateTime | date: 'yyyy-MM-dd HH:mm:ss' }}</p>
-        <p>Desription: {{ sight.description }}</p>
-        <p>Count: {{ sight.count }}</p>
+        <p>Seen at: {{ sight.dateTime | date: 'yyyy-MM-dd HH:mm:ss' }}</p>
     </div>
 </div>
+
+<form name="sightForm">
+    <h2>Add a new sighting</h2>
+    <div class="form-group">
+        <label for="inputSpecies">Species</label>
+        <input type="text" class="form-control" id="inputSpecies" ng-model="newSight.species" placeholder="Enter species" required>
+    </div>
+    <div class="form-group">
+        <label for="inputDesc">Description</label>
+        <textarea type="text" class="form-control" id="inputDesc" ng-model="newSight.description" placeholder="Enter description" rows="3" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="inputDatetime">Date & time</label>
+        <input type="datetime-local" class="form-control" id="inputDatetime" ng-model="newSight.dateTime" placeholder="Enter date" required>
+    </div>
+    <div class="form-group">
+        <label for="inputCount">Count</label>
+        <input type="number" class="form-control" id="inputCount" ng-model="newSight.count" placeholder="Enter count" required>
+    </div>
+    <button type="submit" class="btn btn-success" ng-click="addSight()" ng-disabled="sightForm.$invalid">Add sighting</button>
+</form>

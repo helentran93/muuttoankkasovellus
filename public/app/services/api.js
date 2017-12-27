@@ -10,4 +10,8 @@ MuuttoApp.service('Api', function($http) {
     this.addSighting = function(sight) {
         return $http.post('/sightings', sight);
     };
+    
+    this.getSpecies = function(){
+        return $http.get('/species');
+    };
 })
