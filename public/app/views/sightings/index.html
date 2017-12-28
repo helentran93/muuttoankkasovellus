@@ -1,13 +1,28 @@
 <div class="page-header">
-    <h1>Sightings</h1>
+    <div class="pull-left">
+        <h1>Sightings</h1>
+    </div>
+    <div class="pull-right">
+        <button type="button" class="btn btn-primary" ng-click="propertyName = null; reverse = false;">Unsort</button>
+    </div>
+    <div class="pull-right">
+        <button type="button" class="btn btn-primary" ng-click="orderOld('dateTime')">Oldest</button>
+        <span ng-show="propertyName === 'dateTime'" ng-class="{reverse:reverse}"></span>
+    </div>
+    <div class="pull-right">
+        <button type="button" class="btn btn-primary" ng-click="orderRecent('dateTime')">Recent</button>
+        <span ng-show="propertyName === 'dateTime'" ng-class="{reverse:reverse}"></span>
+    </div>
+    <div class="clearfix"></div>
 </div>
 
-<div ng-repeat="sight in sights" class="panel panel-default">
+<div ng-repeat="sight in sights | orderBy:propertyName:reverse" class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">
             <a ng-href="/sightings/{{ sight.id }}">Species: {{ sight.species }}</a>
         </h3>
     </div>
+    
     <div class="panel-body">
         <p>Seen at: {{ sight.dateTime | date: 'yyyy-MM-dd HH:mm:ss' }}</p>
     </div>
@@ -16,20 +31,27 @@
 <form name="sightForm">
     <h2>Add a new sighting</h2>
     <div class="form-group">
-        <label for="inputSpecies">Species</label>
-        <input type="text" class="form-control" id="inputSpecies" ng-model="newSight.species" placeholder="Enter species" required>
+        <label for="inputSpecies">Select species</label>
+        <select class="form-control" ng-model="newSight.species" required>
+            <option ng-repeat="sp in species" value="{{ sp.name }}">{{ sp.name }}</option>
+        </select>
     </div>
+    
     <div class="form-group">
         <label for="inputDesc">Description</label>
         <textarea type="text" class="form-control" id="inputDesc" ng-model="newSight.description" placeholder="Enter description" rows="3" required></textarea>
     </div>
+    
     <div class="form-group">
         <label for="inputDatetime">Date & time</label>
         <input type="datetime-local" class="form-control" id="inputDatetime" ng-model="newSight.dateTime" placeholder="Enter date" required>
     </div>
+    
     <div class="form-group">
         <label for="inputCount">Count</label>
-        <input type="number" class="form-control" id="inputCount" ng-model="newSight.count" placeholder="Enter count" required>
+        <input type="number" class="form-control" id="inputCount" ng-model="newSight.count" min="1" placeholder="Enter count" required>
     </div>
+    
     <button type="submit" class="btn btn-success" ng-click="addSight()" ng-disabled="sightForm.$invalid">Add sighting</button>
+    <button type="reset" class="btn btn-danger">Reset</button>
 </form>

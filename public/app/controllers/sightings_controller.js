@@ -15,4 +15,17 @@ MuuttoApp.controller('SightingsController', function($scope, $route, Api){
             $route.reload();
         });
     };
+    
+    $scope.propertyName = 'dateTime';
+    $scope.reverse = true;
+    
+    $scope.orderRecent = function(propertyName) {
+        $scope.reverse = true;
+        $scope.propertyName = propertyName;
+    };
+    
+    $scope.orderOld = function(propertyName) {
+        $scope.reverse = false;
+        $scope.propertyName = propertyName;
+    };
 })
