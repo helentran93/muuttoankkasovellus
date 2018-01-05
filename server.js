@@ -100,35 +100,49 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.get('/', (req, res) => {
-  res.sendFile('index.html', { root: __dirname + '/views'});
+  res.status(200).sendFile('index.html', { root: __dirname + '/views'});
 });
 
 app.get('/sightings', (req, res) => {
-  res.status(200).json(sightings);
+  if(sightings.length !== 0) {
+    res.status(200).json(sightings);
+  } else {
+    res.status(404).json({error: 'No sightings found!'});
+  }
 });
 
 app.get('/sightings/:id', (req, res) => {
   var sightingId = req.params.id;
-  for (var i = 0; i < sightings.length; i++) {
-    if (sightings[i].id === sightingId) {
-      res.status(200).json(sightings[i]);
-    }
+  var indexSight = sightings.findIndex(sight => sight.id === sightingId);
+    
+  if(indexSight !== -1) {
+    res.status(200).json(sightings[indexSight]);
+  } else {
+    res.status(404).json({error: 'No such sighting found!'});
   }
 });
 
 app.post('/sightings', (req, res) => {
   var newSight = req.body;
-  newSight.id = (sightings.length + 1).toString();
-  sightings.push(newSight);
-  res.status(200).json(newSight);
+  var indexSpecies = species.findIndex(item => item.name === newSight.species);
+  if(indexSpecies !== -1) {
+    newSight.id = (sightings.length + 1).toString();
+    sightings.push(newSight);
+    res.status(200).json(newSight);
+  } else {
+    res.status(404).json({error: 'The submitted species is not found from the list "species".'});
+  }
 });
 
 app.get('/species', (req, res) => {
-  res.status(200).json(species);
+  if(species.length !== 0) {
+    res.status(200).json(species);
+  } else {
+    res.status(404).json({error: 'No species found!'});
+  }
 });
 
 const port = process.env.PORT ? process.env.PORT : 8081;
