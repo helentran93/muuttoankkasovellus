@@ -137,6 +137,17 @@ app.post('/sightings', (req, res) => {
   }
 });
 
+app.post('/species', (req, res) => {
+  var newSpecies = req.body;
+  var indexSpecies = species.findIndex(item => item.name === newSpecies.name);
+  if(indexSpecies === -1) {
+    species.push(newSpecies);
+    res.status(200).json(newSpecies);
+  } else {
+    res.status(409).json({error: 'The submitted species already exists!'});
+  }
+});
+
 app.get('/species', (req, res) => {
   if(species.length > 0) {
     res.status(200).json(species);

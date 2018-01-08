@@ -14,4 +14,8 @@ MuuttoApp.service('Api', function($http) {
     this.getSpecies = function(){
         return $http.get('/species');
     };
+    
+    this.addSpecies = function(species) {
+        return $http.post('/species', species);
+    };
 })

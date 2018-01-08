@@ -11,4 +11,8 @@ MuuttoApp.config(['$routeProvider', '$locationProvider', function($routeProvider
             controller: 'ShowSightController',
             templateUrl: 'app/views/sightings/show.html'
         })
+        .when('/species', {
+            controller: 'SpeciesController',
+            templateUrl: 'app/views/species/index.html'
+        })
 }]);

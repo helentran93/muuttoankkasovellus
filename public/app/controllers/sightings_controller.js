@@ -4,10 +4,6 @@ MuuttoApp.controller('SightingsController', function($scope, $route, Api){
         $scope.sights = sights.data;
     });
     
-    Api.getSpecies().then(function(species){
-        $scope.species = species.data;
-    });
-    
     $scope.newSight = {};
     
     $scope.addSight = function() {
@@ -30,4 +26,6 @@ MuuttoApp.controller('SightingsController', function($scope, $route, Api){
         $scope.reverse = false;
         $scope.propertyName = propertyName;
     };
+    
+    $scope.regex = "^[a-zA-Z_ ]+$";
 })

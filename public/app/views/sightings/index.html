@@ -32,7 +32,7 @@
     <h2>Add a new sighting</h2>
     <div class="form-group">
         <label>Species</label>
-        <input type="text" class="form-control" name="inputSpecies" ng-model="newSight.species" placeholder="Enter species" required/>
+        <input type="text" class="form-control" name="inputSpecies" ng-model="newSight.species" ng-pattern="regex" placeholder="Enter species" required/>
         <span ng-show="sightForm.inputSpecies.$touched && sightForm.inputSpecies.$invalid">The species is required.</span>
         <p>{{ errorMsg.error }}</p>
     </div>

@@ -1,0 +1,26 @@
+<div class="page-header">
+    <div class="pull-left">
+        <h1>Current list of species</h1>
+    </div>
+</div>
+
+<div class="container">
+    <table class="table">
+        <tr ng-repeat="item in species">
+            <td>{{ item.name }}</td>
+        </tr>
+    </table>
+</div>
+
+<form name="speciesForm">
+    <h2>Add a new species</h2>
+    <div class="form-group">
+        <label>Name of species</label>
+        <input type="text" class="form-control" name="inputSpecies" ng-model="newSpecies.name" ng-pattern="regex" placeholder="Enter species" required/>
+        <span ng-show="speciesForm.inputSpecies.$touched && speciesForm.inputSpecies.$invalid">The name of species is required.</span>
+        <p>{{ errorMsg.error }}</p>
+    </div>
+    
+    <button type="submit" class="btn btn-success" ng-click="addSpecies()" ng-disabled="speciesForm.$invalid">Add species</button>
+    <button type="reset" class="btn btn-danger">Reset</button>
+</form>
