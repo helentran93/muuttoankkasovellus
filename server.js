@@ -107,7 +107,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/sightings', (req, res) => {
-  if(sightings.length !== 0) {
+  if(sightings.length > 0) {
     res.status(200).json(sightings);
   } else {
     res.status(404).json({error: 'No sightings found!'});
@@ -118,7 +118,7 @@ app.get('/sightings/:id', (req, res) => {
   var sightingId = req.params.id;
   var indexSight = sightings.findIndex(sight => sight.id === sightingId);
     
-  if(indexSight !== -1) {
+  if(indexSight > -1) {
     res.status(200).json(sightings[indexSight]);
   } else {
     res.status(404).json({error: 'No such sighting found!'});
@@ -128,7 +128,7 @@ app.get('/sightings/:id', (req, res) => {
 app.post('/sightings', (req, res) => {
   var newSight = req.body;
   var indexSpecies = species.findIndex(item => item.name === newSight.species);
-  if(indexSpecies !== -1) {
+  if(indexSpecies > -1) {
     newSight.id = (sightings.length + 1).toString();
     sightings.push(newSight);
     res.status(200).json(newSight);
@@ -138,7 +138,7 @@ app.post('/sightings', (req, res) => {
 });
 
 app.get('/species', (req, res) => {
-  if(species.length !== 0) {
+  if(species.length > 0) {
     res.status(200).json(species);
   } else {
     res.status(404).json({error: 'No species found!'});

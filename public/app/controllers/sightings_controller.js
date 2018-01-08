@@ -14,7 +14,7 @@ MuuttoApp.controller('SightingsController', function($scope, $route, Api){
         Api.addSighting($scope.newSight).then(function() {
             $route.reload();
         }).catch(function(notCreated) {
-            $scope.errorMsg = notCreated.error;
+            $scope.errorMsg = notCreated.data;
         });
     };
     

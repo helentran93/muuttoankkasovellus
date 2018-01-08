@@ -34,7 +34,7 @@
         <label>Species</label>
         <input type="text" class="form-control" name="inputSpecies" ng-model="newSight.species" placeholder="Enter species" required/>
         <span ng-show="sightForm.inputSpecies.$touched && sightForm.inputSpecies.$invalid">The species is required.</span>
-        <p>{{ errorMsg }}</p>
+        <p>{{ errorMsg.error }}</p>
     </div>
     
     <div class="form-group">
