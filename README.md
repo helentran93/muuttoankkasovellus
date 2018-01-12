@@ -1,4 +1,20 @@
-# Duck backend
+# Muuttoankkasovellus
+
+## Duck front-end
+
+Selainsovellus ankkalajeista ja havainnoista.
+
+Toteutettu ohjelmistokehyksellä AngularJS ja käyttöliittymäkirjastolla Bootstrap.
+
+## Features
+
+1. Etusivulla on lista havainnoista ja samalla on mahdollista lisätä uusia havaintoja.
+2. Listasta voi valita havainnon, jolloin siitä näytetään tarkempia tietoja omalla sivulla.
+3. Havaintoja voi järjestää ajallisesti joko laskevaan tai nousevaan järjestykseen.
+4. Sovelluksessa on mahdollista lisätä myös uusia ankkalajeja.
+5. Käyttäjän syöte tarkistetaan aina ennen kuin se hyväksytään: jos käyttäjän syöttämä ankkalaji ei ole valmiiksi määritelty palvelinsovelluksessa, siitä ilmoitetaan virheilmoituksella käyttäjälle. 
+
+## Duck backend
 
 Simple backend stub for having fun.
 
