@@ -24,8 +24,8 @@
     "typescript": "^2.6.2"
   },
   "engines": {
-    "node": "~6.11.2",
-    "npm": "~3.10.10"
+    "node": "~6.0.0",
+    "npm": "~3.8.6"
   },
   "devDependencies": {
     "@angular/cli": "^1.6.4",
